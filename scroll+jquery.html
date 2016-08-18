@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-2.2.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#little").on("mousedown",function(e){
+                var $box1=$("#box1").get(0).offsetLeft;
+                var $little=$("#little").get(0).offsetLeft;
+                var dl= e.pageX-$little;
+                $(document).on("mousemove",function(e){
+                    var l= e.pageX-$little;
+                    if(l<0)
+                    {
+                        l=0;
+                    }
+                    else if(l>($("#box1").width()-$("#little").width()))
+                    {
+                        l=$("#box1").width()-$("#little").width();
+                    }
+
+                    $("#little").css({left: l});
+                    $("#box2").width(80+l/1000*100).height
+                    (80+l/1000*100);
+                });
+            });
+            $(document).on("mouseup",function(){
+                $(document).off("mousemove up");
+            });
+
+        });
+
+    </script>
+    <style>
+        #box1{width:1000px;
+            height:50px;
+            margin-top:50px;
+            background: gray;
+            position: relative;
+        }
+
+        #little{width:50px;
+            height:50px;
+            background: red;
+            position: absolute;}
+
+        #box2{width:80px;
+            height:80px;
+            background:lightpink;  }
+    </style>
+</head>
+<body>
+<div id="box1">
+    <div id="little"></div>
+</div>
+<div id="box2">
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function()
+{
+var oBox=document.getElementById('box');
+var oLbox=document.getElementById('lbox');
+var oSport=document.getElementById('sport');
+
+oLbox.onmousedown=function(ev)
+{
+	var oEvent=ev||event;
+	var dt=oEvent.clientY-oLbox.offsetTop;
+	var dl=oEvent.clientX-oLbox.offsetLeft;
+	document.onmousemove=function(ev)
+	{
+		var oEvent=ev||event;
+		var l=oEvent.clientX-dl;
+		var t=oEvent.clientY-dt;
+		if(l<0)
+		{
+		l=0;	
+		}else if(l>oBox.offsetWidth-oLbox.offsetWidth)
+		{
+		  l=oBox.offsetWidth-oLbox.offsetWidth;	
+		}
+		if(t<0)
+		{
+		t=0;	
+		}else if(t>oBox.offsetHeight-oLbox.offsetHeight)
+		{
+		t=oBox.offsetHeight-oLbox.offsetHeight;	
+		}
+		oLbox.style.left=l+'px';
+		oLbox.style.top=t+'px';
+		oSport.style.width=50+l/750*100+'px';
+		oSport.style.height=50+l/750*100+'px';
+	};
+	oLbox.onmouseup=function()
+	{
+	document.onmousemove=null;
+	oLbox.onmouseup=null;	
+	};
+	return false;
+};	
+};
+</script>
+<style>
+#box{width:750px;
+     height:50px;
+	 background:#CCC;
+	 margin:auto;
+	 position:relative;}
+
+#lbox{ width:50px;
+       height:50px;
+	   background:#F0C;
+	   position:absolute;}
+
+#sport{ width:100px;
+       height:100px;
+	   border:1px solid #000;}
+</style>
+</head>
+
+<body>
+<div id="box">
+<div id="lbox"></div>
+</div>
+
+<div id="sport"></div>
+</body>
+</html>
